@@ -1,3 +1,46 @@
 {
-  "serie": []
+  "series": [
+    {
+      "id": "e242",
+      "nomeSerie": "serie02",
+      "temporadas": "02",
+      "anoLancamento": "0002",
+      "estudio": "estudio02"
+    },
+    {
+      "id": "4e6e",
+      "nomeSerie": "serie03",
+      "temporadas": "03",
+      "anoLancamento": "0003",
+      "estudio": "estudio03"
+    },
+    {
+      "id": "498b",
+      "nomeSerie": "serie04",
+      "temporadas": "04",
+      "anoLancamento": "0004",
+      "estudio": "estudio04"
+    },
+    {
+      "id": "7d64",
+      "nomeSerie": "serie05",
+      "temporadas": "05",
+      "anoLancamento": "0005",
+      "estudio": "estudio05"
+    },
+    {
+      "id": "bd59",
+      "nomeSerie": "serie06",
+      "temporadas": "06",
+      "anoLancamento": "0006",
+      "estudio": "estudio06"
+    },
+    {
+      "id": "9ce0",
+      "nomeSerie": "serie07",
+      "temporadas": "07",
+      "anoLancamento": "0007",
+      "estudio": "estudio07"
+    }
+  ]
 }

@@ -1,29 +1,63 @@
-//Responsável por cadastrar uma nova série utilizando o método POST
-document.getElementById("btnCadastrar").addEventListener("click", (e) => {
+export async function cadastrarSerie(e) {
     e.preventDefault();
 
     //endpoint da API (URL)
-    const url = "http://localhost:8082/serie"
+    const url = 'http://localhost:8082/series'
 
-    //Capturar dados que vem do formulário
-    const dadosEnviadosAPI = {
-        "nome": document.getElementById("nomeSerie").value,
-        "temporadas": document.getElementById("temporadas").value,
-        "lancamento": document.getElementById("anoLancamento").value,
+    //conseguir capturar os dados que vem do formulário
+    const dadosEnviadosApi = {
+        "nomeSerie": document.getElementById('nomeSerie').value,
+        "temporadas": document.getElementById('temporadas').value,
         "estudio": document.getElementById("produtora").value,
+        "anoLancamento": document.getElementById('anoLancamento').value
     }
 
-    const dadosFinais = JSON.stringify(dadosEnviadosAPI)
+    const dadosFinais = JSON.stringify(dadosEnviadosApi)
 
-    console.log(dadosFinais)
+    try {
+        await fetch(url, {
+            headers: {
+                "Content-type": "application/json"
+            },
+            method: "POST",
+            body: dadosFinais
+        });
 
-    fetch(url, {
-        "method": "post",
-        "headers": {"Content-Type": "application/json"},
-        "body": dadosFinais
-    })
-    .then(resposta => resposta.json())
-    .catch(error => console.log(`Erro ao consumir API no cadastro ${error}`))
-    
-    window.location.reload();
-});
+        window.location.reload();
+    } catch (error) {
+        console.log(`Erro ao consumir a api no cadastro: ${error}`);
+    }
+}
+
+export async function atualizarSerie(e, id) {
+    e.preventDefault();
+
+    if (window.confirm("Você deseja atualizar a série?")) {
+        //tratamento de exceções (api)
+        try {
+            const dadosEnviadosAtualizados = {
+                "nomeSerie": document.getElementById("nomeSerie").value,
+                "temporadas": document.getElementById("temporadas").value,
+                "estudio": document.getElementById("produtora").value,
+                "anoLancamento": document.getElementById("anoLancamento").value
+            }
+
+            const retorno = await fetch(`http://localhost:8082/series/${id}`, {
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(dadosEnviadosAtualizados),
+                method: "PUT"
+            });
+
+            if (retorno.ok) {
+                alert("A série foi atualizada com sucesso!");
+                window.location.reload();
+            } else {
+                alert(`Não foi possível atualizar a série ${retorno.status}`);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
